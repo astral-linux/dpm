@@ -31,6 +31,8 @@ clean:
 	@rm -f src/dpm.o
 	@rm -f src/dpm-pkg
 
+	@rm -f dpm-*
+
 install:
 	@mkdir -p $(BINDIR)
 
@@ -53,3 +55,11 @@ uninstall:
 	@rm -f $(BINDIR)/dpm-pkg
 	@rm -f $(MANDIR)/man1/dpm.1
 	@rm -f $(MANDIR)/man1/dpm-pkg.1
+
+dist: clean
+	mkdir -p dpm-$(VERSION)
+	cp -r Makefile config.mk src doc README COPYING dpm-$(VERSION)
+	pax -wx ustar dpm-$(VERSION) > dpm-$(VERSION).tar
+	rm -rf dpm-$(VERSION)
+	gzip -k dpm-$(VERSION).tar
+	xz dpm-$(VERSION).tar
