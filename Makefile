@@ -3,6 +3,8 @@
 
 .POSIX:
 
+include config.mk
+
 .SUFFIXES:
 .SUFFIXES: .c .o .sh
 
@@ -28,3 +30,16 @@ clean:
 	@rm -f src/dpm
 	@rm -f src/dpm.o
 	@rm -f src/dpm-pkg
+
+install:
+	@mkdir -p $(BINDIR)
+
+	@cp src/dpm $(BINDIR)
+	@chmod 755 $(BINDIR)/dpm
+
+	@cp src/dpm-pkg $(BINDIR)
+	@chmod 755 $(BINDIR)/dpm-pkg
+
+uninstall:
+	@rm -f $(BINDIR)/dpm
+	@rm -f $(BINDIR)/dpm-pkg
