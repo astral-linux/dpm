@@ -59,7 +59,7 @@ uninstall:
 dist: clean
 	mkdir -p dpm-$(VERSION)
 	cp -r Makefile.in configure src doc README INSTALL COPYING dpm-$(VERSION)
-	pax -wx ustar dpm-$(VERSION) > dpm-$(VERSION).tar
+	pax -w -x ustar -f dpm-$(VERSION).tar dpm-$(VERSION)
 	rm -rf dpm-$(VERSION)
 	gzip -k dpm-$(VERSION).tar
 	xz dpm-$(VERSION).tar
