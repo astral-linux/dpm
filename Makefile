@@ -40,6 +40,16 @@ install:
 	@cp src/dpm-pkg $(BINDIR)
 	@chmod 755 $(BINDIR)/dpm-pkg
 
+	@mkdir -p $(MANDIR)/man1
+
+	@cp doc/dpm.1 $(MANDIR)/man1
+	@chmod 644 $(MANDIR)/man1/dpm.1
+
+	@cp doc/dpm-pkg.1 $(MANDIR)/man1
+	@chmod 644 $(MANDIR)/man1/dpm-pkg.1
+
 uninstall:
 	@rm -f $(BINDIR)/dpm
 	@rm -f $(BINDIR)/dpm-pkg
+	@rm -f $(MANDIR)/man1/dpm.1
+	@rm -f $(MANDIR)/man1/dpm-pkg.1

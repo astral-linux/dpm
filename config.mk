@@ -5,3 +5,4 @@ DESTDIR =
 PREFIX  = /usr/local
 
 BINDIR = $(DESTDIR)$(PREFIX)/bin
+MANDIR = $(DESTDIR)$(PREFIX)/share/man
