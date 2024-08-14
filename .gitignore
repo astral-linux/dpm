@@ -1,0 +1,3 @@
+src/dpm
+src/*.o
+src/dpm-pkg
