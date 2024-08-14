@@ -1,0 +1,66 @@
+#!/bin/sh
+
+# Copyright (C) astral
+# See COPYING for more details.
+
+VERSION=0.0.0-pre-alpha
+
+usage() {
+	cat << _EOF
+usage: ./configure [options]
+
+options:
+
+  --destdir=DESTDIR  installation destdir  []
+  --prefix=PREFIX    installation prefix   [/usr/local]
+  --clean            reset files
+  --help, -h         show this message
+_EOF
+}
+
+for arg; do
+	val=${arg##*=}
+	case $arg in
+	--destdir=*) DESTDIR=$val;;
+	--prefix=*) PREFIX=$val;;
+	--clean)
+		rm -f Makefile
+		rm -f config.mk
+		rm -f config.h
+		exit 0;;
+	--help|-h)
+		usage
+		exit 0;;
+	*)
+		printf >&2 "Unknown option: %s\n" "$arg"
+		exit 1;;
+	esac
+done
+
+: "${DESTDIR:=}"
+: "${PREFIX:=/usr/local}"
+
+cat << _EOF > config.mk
+VERSION = $VERSION
+
+DESTDIR = $DESTDIR
+PREFIX  = $PREFIX
+
+BINDIR = \$(DESTDIR)\$(PREFIX)/bin
+MANDIR = \$(DESTDIR)\$(PREFIX)/share/man
+_EOF
+
+cat << _EOF > config.h
+#ifndef _CONFIG_H
+#define _CONFIG_H
+
+const char *version = "$VERSION";
+const char *destdir = "$DESTDIR";
+const char *prefix  = "$PREFIX";
+
+#endif /* !_CONFIG_H */
+_EOF
+
+cp Makefile.in Makefile
+
+exit 0

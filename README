@@ -4,13 +4,7 @@ Build packages with dpm-pkg and manage system files with dpm.
 
 # Build and Install
 
-To build dpm, run:
-
-	make
-
-To install dpm, run:
-
-	make install
+For build and install instructions, see INSTALL.
 
 # License
 

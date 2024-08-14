@@ -1,0 +1,18 @@
+# Build
+
+To build dpm, run:
+
+	./configure
+	make
+
+For more configuration options, use:
+
+	./configure --help
+or
+	./configure -h
+
+# Install
+
+To install dpm, run:
+
+	make install
