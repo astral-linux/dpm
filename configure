@@ -24,7 +24,9 @@ for arg; do
 	--destdir=*) DESTDIR=$val;;
 	--prefix=*) PREFIX=$val;;
 	--clean)
-		rm -f Makefile
+		if [ -e Makefile ]; then
+			mv Makefile Makefile.in
+		fi
 		rm -f config.mk
 		rm -f config.h
 		exit 0;;
@@ -61,6 +63,8 @@ const char *prefix  = "$PREFIX";
 #endif /* !_CONFIG_H */
 _EOF
 
-cp Makefile.in Makefile
+if [ -e Makefile.in ]; then
+	mv Makefile.in Makefile
+fi
 
 exit 0
